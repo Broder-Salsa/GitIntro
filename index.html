@@ -73,6 +73,13 @@
         <input type="text" id="catSearchInput" placeholder="🔍 Search cat / @user...">
       </div>
 
+      <!-- Preview Local Cat File Button -->
+      <button class="control-btn preview-btn" id="previewCatBtn" title="Preview your local cat JSON file">
+        <span class="btn-icon">📂</span>
+        <span class="btn-label">PREVIEW MY CAT</span>
+      </button>
+      <input type="file" id="catFileInput" accept=".json" style="display: none;">
+
       <!-- Git Instructions Modal Toggle -->
       <button class="control-btn help-btn" id="helpModalBtn" title="View Student Git Instructions">
         <span class="btn-icon">⚡</span>
@@ -80,7 +87,7 @@
       </button>
 
       <!-- Reload button -->
-      <button class="control-btn refresh-btn" id="refreshBtn" title="Reload Cats from Disk">
+      <button class="control-btn refresh-btn" id="refreshBtn" title="Reset / Reload Dance Floor">
         <span class="btn-icon">🔄</span>
       </button>
     </div>
@@ -223,6 +230,11 @@ git pull origin main</code></pre>
     </div>
   </div>
 
+  <!-- Toast notification for live previews -->
+  <div class="toast-notification" id="toastNotification"></div>
+
+  <!-- Cat registry data loaded as standard JavaScript (no CORS restrictions on file://) -->
+  <script src="cats/registry.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

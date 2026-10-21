@@ -24,7 +24,7 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Rebuild cats/registry.json
+      - name: Rebuild cats/registry.json & cats/registry.js
         run: |
           python -c "
           import json, glob, os
@@ -45,14 +45,21 @@ jobs:
               except Exception as e:
                   print(f'Skipping {fname}: {e}')
 
+          # 1. Write JSON
           with open('cats/registry.json', 'w', encoding='utf-8') as rf:
               json.dump(cats, rf, indent=2)
-          print(f'Updated registry with {len(cats)} cats.')
+
+          # 2. Write JavaScript for file:/// compatibility without any local server
+          with open('cats/registry.js', 'w', encoding='utf-8') as jf:
+              jf.write('// Automatically maintained by GitHub Actions & Git Disco\n')
+              jf.write('window.GIT_DISCO_CATS = ' + json.dumps(cats, indent=2) + ';\n')
+
+          print(f'Updated registry.json and registry.js with {len(cats)} cats.')
           "
 
       - name: Commit & push updated registry
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cats/registry.json
+          git add cats/registry.json cats/registry.js
           git diff --quiet && git diff --staged --quiet || (git commit -m "chore(disco): update cats registry [skip ci]" && git push)

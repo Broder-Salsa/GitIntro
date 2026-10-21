@@ -581,27 +581,56 @@ function showCatDetailModal(cat) {
 }
 
 // ==========================================
-// 6. DATA LOADING STRATEGY
+// 6. DATA LOADING & PREVIEW STRATEGY (100% HTML/JS)
 // ==========================================
+
+function showCatToast(msg) {
+  const toast = document.getElementById('toastNotification');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+function loadCatFromFile(file) {
+  if (!file.name.endsWith('.json')) {
+    showCatToast('⚠️ Please drop a .json cat file!');
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const cat = JSON.parse(e.target.result);
+      if (!cat.username) {
+        cat.username = file.name.replace(/\.json$/i, '');
+      }
+      // Add or replace existing in state.cats
+      const existingIdx = state.cats.findIndex(c => c.username?.toLowerCase() === cat.username?.toLowerCase());
+      if (existingIdx >= 0) {
+        state.cats[existingIdx] = cat;
+      } else {
+        state.cats.push(cat);
+      }
+      renderDancers();
+      playCatMeow();
+      showCatToast(`🎉 Cat "@${cat.username}" is live on the dance floor!`);
+    } catch (err) {
+      showCatToast(`❌ Invalid JSON in ${file.name}: ${err.message}`);
+    }
+  };
+  reader.readAsText(file);
+}
 
 async function loadCats() {
   let loadedCats = [];
 
-  // Strategy 1: Attempt to load from live python /api/cats endpoint
-  try {
-    const res = await fetch('/api/cats', { cache: 'no-store' });
-    if (res.ok) {
-      const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) {
-        loadedCats = data;
-        console.log(`[Git Disco] Loaded ${loadedCats.length} cats from /api/cats`);
-      }
-    }
-  } catch (e) {
-    // Strategy 1 not available, proceed to fallback
+  // Strategy 1: Loaded from cats/registry.js (Works on file:/// with zero python/server!)
+  if (window.GIT_DISCO_CATS && Array.isArray(window.GIT_DISCO_CATS) && window.GIT_DISCO_CATS.length > 0) {
+    loadedCats = window.GIT_DISCO_CATS.map(c => ({ ...c }));
+    console.log(`[Git Disco] Loaded ${loadedCats.length} cats from window.GIT_DISCO_CATS`);
   }
 
-  // Strategy 2: If /api/cats is not available, try cats/registry.json (static or GitHub Pages)
+  // Strategy 2: If running on a local web server, also attempt cats/registry.json
   if (!loadedCats.length) {
     try {
       const res = await fetch('cats/registry.json', { cache: 'no-store' });
@@ -613,11 +642,11 @@ async function loadCats() {
         }
       }
     } catch (e) {
-      console.warn('[Git Disco] Could not load cats/registry.json', e);
+      // Ignored on file://
     }
   }
 
-  // Strategy 3: Built-in fallback if running strictly locally with file://
+  // Strategy 3: Built-in fallback
   if (!loadedCats.length) {
     loadedCats = [
       {
@@ -669,9 +698,48 @@ function setupEventListeners() {
     renderDancers();
   });
 
+  // Preview My Cat Button & File Input
+  const previewBtn = document.getElementById('previewCatBtn');
+  const fileInput = document.getElementById('catFileInput');
+  if (previewBtn && fileInput) {
+    previewBtn.addEventListener('click', () => {
+      fileInput.click();
+    });
+    fileInput.addEventListener('change', (e) => {
+      const files = e.target.files;
+      if (files && files.length > 0) {
+        for (let i = 0; i < files.length; i++) {
+          loadCatFromFile(files[i]);
+        }
+      }
+      fileInput.value = ''; // reset so same file can be reloaded
+    });
+  }
+
+  // Drag and Drop JSON onto page to preview
+  window.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    document.body.classList.add('drag-over');
+  });
+  window.addEventListener('dragleave', (e) => {
+    if (e.relatedTarget === null) {
+      document.body.classList.remove('drag-over');
+    }
+  });
+  window.addEventListener('drop', (e) => {
+    e.preventDefault();
+    document.body.classList.remove('drag-over');
+    if (e.dataTransfer && e.dataTransfer.files) {
+      for (let i = 0; i < e.dataTransfer.files.length; i++) {
+        loadCatFromFile(e.dataTransfer.files[i]);
+      }
+    }
+  });
+
   // Refresh Button
   document.getElementById('refreshBtn').addEventListener('click', () => {
     loadCats();
+    showCatToast('🔄 Dance floor reloaded!');
   });
 
   // How to Join Modal
@@ -712,9 +780,4 @@ window.addEventListener('DOMContentLoaded', () => {
   initDanceFloorTiles();
   setupEventListeners();
   loadCats();
-
-  // Periodic check every 5 seconds to auto-detect newly pulled cats
-  setInterval(() => {
-    loadCats();
-  }, 5000);
 });

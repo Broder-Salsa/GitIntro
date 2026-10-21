@@ -9,7 +9,7 @@ This guide is designed for the instructor (acting as the **Tech Lead** / **Maint
 | Time | Phase | Focus |
 | :--- | :--- | :--- |
 | **00:00 – 00:10** | **The Big Picture** | What is Git vs. GitHub? Why branches? Show the live disco floor with only the DJ on stage. |
-| **00:10 – 00:20** | **Hands-On Part 1** | Students clone, run `python3 server.py`, switch branch, and create their `cats/[username].json`. |
+| **00:10 – 00:20** | **Hands-On Part 1** | Students clone, open `index.html`, switch branch, and create their `cats/[username].json`. |
 | **00:20 – 00:30** | **Hands-On Part 2** | `git add`, `git commit`, `git push`, and opening Pull Requests on GitHub. |
 | **00:30 – 00:45** | **The Review Cycle** | Tech Lead reviews PRs live on projector, requests one trivial change, students push revisions, merge all! |
 | **00:45 – 00:55** | **The Finale** | Everyone runs `git switch main && git pull`. Turn up the disco beat and celebrate! |

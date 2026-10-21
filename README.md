@@ -23,14 +23,14 @@ cd GitIntro
 
 ### 2. Launch the Dance Floor Locally
 
-You can run the built-in local server:
+**No Python, Node, or server required!**
+Simply open `index.html` in your web browser:
 
-```bash
-python3 server.py
-```
+- **Mac:** `open index.html` (or double-click `index.html` in Finder)
+- **Windows:** `start index.html` (or double-click `index.html` in File Explorer)
+- **Linux:** `xdg-open index.html`
 
-*This will automatically launch `http://localhost:8000` in your browser!*
-*(If you don't have Python running, you can also directly open `index.html` in any web browser).*
+The disco dance floor will immediately load right in your browser!
 
 ---
 
@@ -82,6 +82,11 @@ Now open `cats/[your-username].json` in your editor (VS Code, Cursor, Nano, etc.
 | **`favorite_color`**| Any Hex color (e.g. `#FF007F`, `#00F0FF`) or CSS color name |
 | **`groove_speed`** | `chill`, `normal`, `hyper` |
 | **`catchphrase`** | Any fun quote or dance mantra! |
+
+> [!TIP]
+> **Preview your cat before pushing:**
+> Want to see what your cat looks like before committing?
+> In `index.html`, click **"📂 PREVIEW MY CAT"** and select your file, or **drag and drop** your `cats/[your-username].json` file anywhere onto the dance floor window!
 
 ---
 
@@ -150,5 +155,5 @@ Once the instructor merges the Pull Requests:
    ```bash
    git pull origin main
    ```
-3. Refresh your browser at `http://localhost:8000`!
-4. **Turn on the DISCO BEAT button**, adjust the BPM, and watch the entire class dance together! 🪩🐱
+3. Refresh `index.html` in your browser!
+4. **Turn on the PLAY BEAT button**, adjust the BPM, and watch the entire class dance together! 🪩🐱
