@@ -1,0 +1,58 @@
+name: 🪩 Update Dancefloor Registry
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'cats/*.json'
+
+permissions:
+  contents: write
+
+jobs:
+  build-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Rebuild cats/registry.json
+        run: |
+          python -c "
+          import json, glob, os
+
+          cats = []
+          for path in sorted(glob.glob('cats/*.json')):
+              fname = os.path.basename(path)
+              if fname.lower() in ('template.json', 'registry.json'):
+                  continue
+              try:
+                  with open(path, 'r', encoding='utf-8') as f:
+                      data = json.load(f)
+                      if isinstance(data, dict):
+                          base = os.path.splitext(fname)[0]
+                          if not data.get('username'):
+                              data['username'] = base
+                          cats.append(data)
+              except Exception as e:
+                  print(f'Skipping {fname}: {e}')
+
+          with open('cats/registry.json', 'w', encoding='utf-8') as rf:
+              json.dump(cats, rf, indent=2)
+          print(f'Updated registry with {len(cats)} cats.')
+          "
+
+      - name: Commit & push updated registry
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cats/registry.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore(disco): update cats registry [skip ci]" && git push)

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐱 🪩 Git Disco: The Multi-Cat Dance Floor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Press+Start+2P&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-neon">
+  <!-- Ceiling Light Beams -->
+  <div class="light-beams">
+    <div class="beam beam-1"></div>
+    <div class="beam beam-2"></div>
+    <div class="beam beam-3"></div>
+    <div class="beam beam-4"></div>
+  </div>
+
+  <!-- Disco Ball -->
+  <div class="disco-rig">
+    <div class="disco-wire"></div>
+    <div class="disco-ball" id="discoBall">
+      <div class="disco-facet"></div>
+      <div class="disco-glow"></div>
+    </div>
+  </div>
+
+  <!-- Top Navigation & Controls Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo">
+        <span class="logo-icon">🪩</span>
+        <div class="logo-text">
+          <h1>GIT DISCO</h1>
+          <span class="subtitle">Distributed Version-Controlled Dance Floor</span>
+        </div>
+      </div>
+      <div class="cat-counter-badge" id="catCounterBadge">
+        <span class="pulse-dot"></span>
+        <span id="catCountText">1 Cat Grooving</span>
+      </div>
+    </div>
+
+    <!-- DJ Control Deck -->
+    <div class="dj-controls">
+      <!-- Audio Toggle -->
+      <button class="control-btn music-btn" id="musicToggleBtn" title="Toggle Disco Synth Beat">
+        <span class="btn-icon">🎵</span>
+        <span class="btn-label">PLAY BEAT</span>
+      </button>
+
+      <!-- BPM Slider -->
+      <div class="control-group bpm-group">
+        <label for="bpmSlider">TEMPO: <span id="bpmDisplay">124</span> BPM</label>
+        <input type="range" id="bpmSlider" min="80" max="180" value="124" step="2">
+      </div>
+
+      <!-- Lighting Theme Selector -->
+      <div class="control-group theme-group">
+        <label for="themeSelect">VIBE</label>
+        <select id="themeSelect">
+          <option value="theme-neon" selected>Neon Synth</option>
+          <option value="theme-cyber">Cyberpunk</option>
+          <option value="theme-retro">Golden 70s</option>
+          <option value="theme-midnight">Midnight Chill</option>
+        </select>
+      </div>
+
+      <!-- Cat Filter / Spotlight -->
+      <div class="control-group search-group">
+        <input type="text" id="catSearchInput" placeholder="🔍 Search cat / @user...">
+      </div>
+
+      <!-- Git Instructions Modal Toggle -->
+      <button class="control-btn help-btn" id="helpModalBtn" title="View Student Git Instructions">
+        <span class="btn-icon">⚡</span>
+        <span class="btn-label">HOW TO JOIN</span>
+      </button>
+
+      <!-- Reload button -->
+      <button class="control-btn refresh-btn" id="refreshBtn" title="Reload Cats from Disk">
+        <span class="btn-icon">🔄</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Club Stage & Floor -->
+  <main class="club-arena">
+    <!-- DJ Stage Area -->
+    <section class="dj-stage">
+      <div class="stage-scaffold">
+        <div class="speaker speaker-left">
+          <div class="sub-cone cone-1"></div>
+          <div class="sub-cone cone-2"></div>
+        </div>
+
+        <div class="dj-booth">
+          <div class="dj-booth-front">
+            <span class="dj-neon-sign">TECH LEAD / DJ DECK</span>
+            <div class="equalizer-bars">
+              <span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="dj-platform" id="djPlatform">
+            <!-- Instructor / Host Cat will appear here -->
+          </div>
+        </div>
+
+        <div class="speaker speaker-right">
+          <div class="sub-cone cone-1"></div>
+          <div class="sub-cone cone-2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The 3D Interactive Dance Floor -->
+    <section class="dancefloor-container">
+      <div class="dancefloor-perspective">
+        <div class="dancefloor-grid" id="danceFloorTiles">
+          <!-- Procedurally generated lighted disco tiles -->
+        </div>
+
+        <!-- Student Cats will be placed on this dance stage layer -->
+        <div class="dancefloor-actors" id="danceFloorActors">
+          <!-- Dynamic student cats inserted here by app.js -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Command Cheat Bar -->
+  <footer class="terminal-bar">
+    <div class="terminal-tag">GIT CHEATSHEET</div>
+    <div class="terminal-scroll">
+      <code>1. git switch -c add-cat-YOURNAME</code>
+      <span class="sep">→</span>
+      <code>2. cp cats/TEMPLATE.json cats/YOURNAME.json</code>
+      <span class="sep">→</span>
+      <code>3. git add . && git commit -m "Add my cat"</code>
+      <span class="sep">→</span>
+      <code>4. git push -u origin add-cat-YOURNAME</code>
+      <span class="sep">→</span>
+      <code>5. Open Pull Request on GitHub!</code>
+    </div>
+  </footer>
+
+  <!-- Student Instructions Modal / Overlay -->
+  <div class="modal-backdrop" id="helpModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>🚀 How to Get Your Cat on the Dance Floor</h2>
+        <button class="modal-close-btn" id="closeHelpModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <ol class="step-list">
+          <li>
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <strong>Make sure you are on a fresh branch:</strong>
+              <pre><code>git switch -c add-cat-YOUR_GITHUB_USERNAME</code></pre>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <strong>Copy the template into your own cat file:</strong>
+              <pre><code>cp cats/TEMPLATE.json cats/YOUR_GITHUB_USERNAME.json</code></pre>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <strong>Customize your cat's JSON properties:</strong>
+              <ul>
+                <li><code>breed</code>: calico, tuxedo, ginger, siamese, void, neon</li>
+                <li><code>dance_style</code>: breakdance, bounce, spin, moonwalk, disco, headbang, robot, wiggle</li>
+                <li><code>accessory</code>: sunglasses, party-hat, headphones, gold-chain, bow-tie, crown, none</li>
+                <li><code>favorite_color</code>: hex code or CSS color (e.g. <code>#00FFCC</code>, <code>hotpink</code>)</li>
+                <li><code>catchphrase</code>: Your cat's meow mantra!</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <strong>Commit and push your branch:</strong>
+              <pre><code>git add cats/YOUR_GITHUB_USERNAME.json
+git commit -m "feat(cats): add YOUR_GITHUB_USERNAME to the dancefloor"
+git push -u origin add-cat-YOUR_GITHUB_USERNAME</code></pre>
+            </div>
+          </li>
+          <li>
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <strong>Open a Pull Request on GitHub:</strong>
+              <p>Wait for the Instructor (Tech Lead) review, respond to any requested changes, and once merged, run:</p>
+              <pre><code>git switch main
+git pull origin main</code></pre>
+              <p>Refresh this page to see the entire class dance together! 🎉</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button class="control-btn primary-btn" id="closeHelpModalBtn">Got it, let's dance!</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cat Detail Inspection Modal (when clicking a cat) -->
+  <div class="modal-backdrop" id="catDetailModal" style="display: none;">
+    <div class="modal-card detail-card">
+      <div class="modal-header">
+        <h2 id="modalCatTitle">Cat Details</h2>
+        <button class="modal-close-btn" id="closeDetailModal">&times;</button>
+      </div>
+      <div class="modal-body modal-cat-body" id="modalCatBody">
+        <!-- Rendered detail view -->
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

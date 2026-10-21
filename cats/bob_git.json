@@ -1,0 +1,11 @@
+{
+  "username": "bob_git",
+  "name": "Bob Marley",
+  "cat_name": "Smooth Operator",
+  "breed": "siamese",
+  "favorite_color": "#00FF66",
+  "dance_style": "moonwalk",
+  "accessory": "gold-chain",
+  "groove_speed": "chill",
+  "catchphrase": "No merge conflict, no cry!"
+}

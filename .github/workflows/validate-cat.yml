@@ -1,0 +1,70 @@
+name: 🐱 Validate Dancing Cat PR
+
+on:
+  pull_request:
+    paths:
+      - 'cats/**'
+
+jobs:
+  validate-cat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Validate Cat JSON Files
+        run: |
+          python -c "
+          import json, glob, sys, os
+
+          valid_breeds = {'calico', 'tuxedo', 'ginger', 'siamese', 'void', 'neon'}
+          valid_dances = {'breakdance', 'bounce', 'spin', 'moonwalk', 'disco', 'headbang', 'robot', 'wiggle'}
+          valid_accessories = {'sunglasses', 'party-hat', 'headphones', 'gold-chain', 'bow-tie', 'crown', 'none'}
+
+          errors = []
+          files = glob.glob('cats/*.json')
+
+          for path in files:
+              fname = os.path.basename(path)
+              if fname.lower() in ('template.json', 'registry.json'):
+                  continue
+              try:
+                  with open(path, 'r', encoding='utf-8') as f:
+                      data = json.load(f)
+              except Exception as e:
+                  errors.append(f'❌ {fname}: Invalid JSON syntax: {e}')
+                  continue
+
+              # Check required fields
+              for req in ['username', 'name', 'cat_name', 'dance_style']:
+                  if not data.get(req):
+                      errors.append(f'❌ {fname}: Missing required field: {req}')
+
+              # Check filename matches username
+              expected_username = os.path.splitext(fname)[0]
+              if data.get('username') and data['username'].lower() != expected_username.lower():
+                  errors.append(f'⚠️ {fname}: username field \"{data.get(\"username\")}\" does not match filename \"{expected_username}\"')
+
+              # Breed check
+              breed = data.get('breed', '').lower()
+              if breed and breed not in valid_breeds:
+                  print(f'ℹ️ {fname}: Custom breed \"{breed}\" detected. Valid defaults are: {valid_breeds}')
+
+              # Dance check
+              dance = data.get('dance_style', '').lower()
+              if dance and dance not in valid_dances:
+                  print(f'ℹ️ {fname}: Custom dance style \"{dance}\" detected. Valid defaults are: {valid_dances}')
+
+          if errors:
+              print('\nValidation Errors:')
+              for err in errors:
+                  print(err)
+              sys.exit(1)
+          else:
+              print('\n✨ All dancing cats validated successfully! Ready to merge and dance!')
+          "
