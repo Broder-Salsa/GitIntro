@@ -7,3 +7,8 @@ __pycache__/
 INSTRUCTOR_GUIDE.md
 [pP]resentation.pptx
 *.pptx
+[pP]resentation*.pdf
+~$*
+*.csv
+students.csv
+Github_adding_commands*
