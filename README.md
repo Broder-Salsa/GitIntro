@@ -147,13 +147,13 @@ Your instructor (the Tech Lead) will review your PR.
 
 Once the instructor merges the Pull Requests:
 
-1. Switch back to your local `main` branch:
+1. Switch back to your local `master` branch:
    ```bash
-   git switch main
+   git switch master
    ```
 2. Pull all merged changes from the class:
    ```bash
-   git pull origin main
+   git pull origin master
    ```
 3. Refresh `index.html` in your browser!
 4. **Turn on the PLAY BEAT button**, adjust the BPM, and watch the entire class dance together! 🪩🐱

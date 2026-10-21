@@ -12,25 +12,15 @@ window.GIT_DISCO_CATS = [
     "catchphrase": "Merge conflict? Not on my dance floor!"
   },
   {
-    "username": "alice_dev",
-    "name": "Alice Cooper",
-    "cat_name": "Breakbeat Bella",
+    "username": "camille_super_TA",
+    "name": "Camille",
+    "cat_name": "Camillonella",
     "breed": "calico",
     "favorite_color": "#FF007F",
-    "dance_style": "breakdance",
-    "accessory": "sunglasses",
-    "groove_speed": "hyper",
-    "catchphrase": "Git commit -m 'Dropped the beat!'"
-  },
-  {
-    "username": "bob_git",
-    "name": "Bob Marley",
-    "cat_name": "Smooth Operator",
-    "breed": "siamese",
-    "favorite_color": "#00FF66",
-    "dance_style": "moonwalk",
-    "accessory": "gold-chain",
+    "dance_style": "robot",
+    "accessory": "headphones",
     "groove_speed": "chill",
-    "catchphrase": "No merge conflict, no cry!"
+    "catchphrase": "Git commit -m 'I'm sick!'"
   }
+
 ];
