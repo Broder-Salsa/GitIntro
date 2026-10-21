@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -24,14 +26,33 @@ jobs:
       - name: Validate Cat JSON Files
         run: |
           python -c "
-          import json, glob, sys, os
+          import json, glob, sys, os, subprocess
 
           valid_breeds = {'calico', 'tuxedo', 'ginger', 'siamese', 'void', 'neon'}
           valid_dances = {'breakdance', 'bounce', 'spin', 'moonwalk', 'disco', 'headbang', 'robot', 'wiggle'}
           valid_accessories = {'sunglasses', 'party-hat', 'headphones', 'gold-chain', 'bow-tie', 'crown', 'none'}
 
           errors = []
-          files = glob.glob('cats/*.json')
+
+          # If this is a Pull Request, ONLY validate the files changed in this PR!
+          base_ref = os.environ.get('GITHUB_BASE_REF')
+          if base_ref:
+              try:
+                  diff_output = subprocess.check_output(
+                      ['git', 'diff', '--name-only', '--diff-filter=ACMRT', f'origin/{base_ref}...HEAD', '--', 'cats/'],
+                      text=True
+                  )
+                  files = [f.strip() for f in diff_output.splitlines() if f.strip().endswith('.json')]
+                  print(f'🔍 PR Mode: Validating only cat files changed in this PR: {files}')
+              except Exception as e:
+                  print(f'Notice: Could not get PR diff ({e}), falling back to all cat files.')
+                  files = glob.glob('cats/*.json')
+          else:
+              files = glob.glob('cats/*.json')
+
+          if not files:
+              print('✨ No cat JSON files to validate.')
+              sys.exit(0)
 
           for path in files:
               fname = os.path.basename(path)

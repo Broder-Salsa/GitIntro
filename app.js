@@ -19,8 +19,70 @@ const state = {
 };
 
 // ==========================================
-// 2. PROCEDURAL SVG CAT GENERATOR
+// 2. PROCEDURAL SVG CAT GENERATOR & DRESS CODE VALIDATOR
 // ==========================================
+
+const VALID_SPECS = {
+  breeds: ['calico', 'tuxedo', 'ginger', 'siamese', 'void', 'neon'],
+  dances: ['breakdance', 'bounce', 'spin', 'moonwalk', 'disco', 'headbang', 'robot', 'wiggle'],
+  accessories: ['sunglasses', 'party-hat', 'headphones', 'gold-chain', 'bow-tie', 'crown', 'none'],
+  speeds: ['chill', 'normal', 'hyper']
+};
+
+function validateCat(cat, filename = '') {
+  const errors = [];
+  if (!cat || typeof cat !== 'object') {
+    return ['File does not contain a valid JSON object.'];
+  }
+
+  // 1. Required fields
+  if (!cat.username || typeof cat.username !== 'string' || !cat.username.trim()) {
+    errors.push('Missing or empty "username" field.');
+  } else if (filename) {
+    const base = filename.replace(/\.json$/i, '');
+    if (cat.username.toLowerCase() !== base.toLowerCase()) {
+      errors.push(`"username": "${cat.username}" does not match filename "${filename}"! It must be "${base}".`);
+    }
+  }
+
+  if (!cat.name || typeof cat.name !== 'string' || !cat.name.trim()) {
+    errors.push('Missing or empty "name" (student name) field.');
+  }
+
+  if (!cat.cat_name || typeof cat.cat_name !== 'string' || !cat.cat_name.trim()) {
+    errors.push('Missing or empty "cat_name" field.');
+  }
+
+  // 2. Breed check
+  const breed = (cat.breed || '').toLowerCase();
+  if (!breed) {
+    errors.push('Missing required "breed" field.');
+  } else if (!VALID_SPECS.breeds.includes(breed)) {
+    errors.push(`Unknown breed "${cat.breed}". Allowed breeds: ${VALID_SPECS.breeds.join(', ')}.`);
+  }
+
+  // 3. Dance style check
+  const dance = (cat.dance_style || '').toLowerCase();
+  if (!dance) {
+    errors.push('Missing required "dance_style" field.');
+  } else if (!VALID_SPECS.dances.includes(dance)) {
+    errors.push(`Unknown dance_style "${cat.dance_style}". Allowed styles: ${VALID_SPECS.dances.join(', ')}.`);
+  }
+
+  // 4. Accessory check
+  const accessory = (cat.accessory || 'none').toLowerCase();
+  if (!VALID_SPECS.accessories.includes(accessory)) {
+    errors.push(`Unknown accessory "${cat.accessory}". Allowed accessories: ${VALID_SPECS.accessories.join(', ')}.`);
+  }
+
+  // 5. Groove speed check
+  const speed = (cat.groove_speed || 'normal').toLowerCase();
+  if (!VALID_SPECS.speeds.includes(speed)) {
+    errors.push(`Unknown groove_speed "${cat.groove_speed}". Allowed speeds: ${VALID_SPECS.speeds.join(', ')}.`);
+  }
+
+  return errors;
+}
 
 function getBreedColors(breed) {
   switch (breed?.toLowerCase()) {
@@ -188,8 +250,13 @@ function renderCatSVG(cat) {
       <line x1="78" y1="44" x2="64" y2="46" stroke="#fff" stroke-width="1.2" opacity="0.6" />
       <line x1="80" y1="49" x2="64" y2="49" stroke="#fff" stroke-width="1.2" opacity="0.6" />
 
-      <!-- Eyes (if no sunglasses) -->
-      ${accessory !== 'sunglasses' ? `
+      <!-- Eyes (or Red X if broken/invalid) -->
+      ${cat.errors && cat.errors.length > 0 ? `
+        <text x="35" y="44" fill="#ff0055" font-size="14" font-weight="900" font-family="monospace">✕</text>
+        <text x="56" y="44" fill="#ff0055" font-size="14" font-weight="900" font-family="monospace">✕</text>
+        <rect x="32" y="74" width="36" height="13" rx="3" fill="#ff0055" />
+        <text x="50" y="84" text-anchor="middle" fill="#fff" font-size="8" font-weight="900" font-family="monospace">INVALID</text>
+      ` : accessory !== 'sunglasses' ? `
         <ellipse cx="40" cy="40" rx="4.5" ry="5.5" fill="${c.eyes}" />
         <ellipse cx="60" cy="40" rx="4.5" ry="5.5" fill="${c.eyes}" />
         <ellipse cx="40" cy="40" rx="2" ry="4.5" fill="#111" />
@@ -203,8 +270,10 @@ function renderCatSVG(cat) {
       <polygon points="50,47 47,44 53,44" fill="${c.nose}" />
       <path d="M 47 48 Q 50 51 50 49 Q 50 51 53 48" fill="none" stroke="#222" stroke-width="1.2" stroke-linecap="round" />
 
-      <!-- Accessory Element (Glasses, Hat, Chain, etc.) -->
-      ${accessorySvg}
+      <!-- Accessory Element (or Warning if invalid accessory) -->
+      ${cat.errors && cat.errors.some(e => e.includes('accessory')) ? `
+        <text x="44" y="24" fill="#ff0055" font-size="16">⚠️</text>
+      ` : accessorySvg}
     </svg>
   `;
 }
@@ -507,34 +576,61 @@ function renderDancers() {
 
 function createCatElement(cat, isDj = false) {
   const wrap = document.createElement('div');
-  const styleClass = `dance-${(cat.dance_style || 'bounce').toLowerCase()}`;
+  const hasErrors = cat.errors && cat.errors.length > 0;
+  const styleClass = hasErrors ? 'dance-broken' : `dance-${(cat.dance_style || 'bounce').toLowerCase()}`;
   const speedClass = `speed-${(cat.groove_speed || 'normal').toLowerCase()}`;
 
-  wrap.className = `cat-dancer ${styleClass} ${speedClass} ${isDj ? 'dj-performer' : ''}`;
+  wrap.className = `cat-dancer ${styleClass} ${speedClass} ${isDj ? 'dj-performer' : ''} ${hasErrors ? 'broken-cat' : ''}`;
   wrap.dataset.username = cat.username;
 
   wrap.innerHTML = `
-    <div class="cat-speech-bubble">"${cat.catchphrase || 'Git dance!'}"</div>
+    <div class="cat-speech-bubble">${hasErrors ? `🚨 "Oops! I have ${cat.errors.length} error(s)! Click to fix!"` : `"${cat.catchphrase || 'Git dance!'}"`}</div>
     <div class="cat-avatar-wrap">
       ${renderCatSVG(cat)}
     </div>
     <div class="cat-shadow"></div>
     <div class="cat-label">
-      <span class="cat-label-name">${cat.cat_name || 'Anonymous Cat'}</span>
-      <span class="cat-label-sub">@${cat.username || 'unknown'}</span>
+      <span class="cat-label-name">${cat.cat_name || 'Anonymous Cat'}${hasErrors ? ` <span class="broken-badge">⚠️ ${cat.errors.length} ISSUE${cat.errors.length > 1 ? 'S' : ''}</span>` : ''}</span>
+      <span class="cat-label-sub">@${cat.username || 'unknown'}${hasErrors ? ' • Validation Error' : ''}</span>
     </div>
   `;
 
   // Click handler for cat solo move + sound + inspect modal
   wrap.addEventListener('click', (e) => {
     e.stopPropagation();
-    playCatMeow();
-    wrap.classList.add('speaking');
-    setTimeout(() => wrap.classList.remove('speaking'), 2400);
-    showCatDetailModal(cat);
+    if (hasErrors) {
+      showCatErrorModal(cat);
+    } else {
+      playCatMeow();
+      wrap.classList.add('speaking');
+      setTimeout(() => wrap.classList.remove('speaking'), 2400);
+      showCatDetailModal(cat);
+    }
   });
 
   return wrap;
+}
+
+function showCatErrorModal(cat) {
+  const modal = document.getElementById('catErrorModal');
+  const body = document.getElementById('modalErrorBody');
+  if (!modal || !body) return;
+
+  const errors = cat.errors || ['Unknown validation error.'];
+  body.innerHTML = `
+    <div class="error-diagnosis-box">
+      <div class="error-intro">
+        🚨 <strong>cats/${cat.username || 'cat'}.json</strong> has ${errors.length} validation issue${errors.length > 1 ? 's' : ''}:
+      </div>
+      <ul>
+        ${errors.map(err => `<li>❌ ${err}</li>`).join('')}
+      </ul>
+      <p style="margin-top: 14px; color: #fff; font-size: 13px;">
+        💡 <em>Fix these lines in your local JSON file and preview/drop it again to make your cat dance!</em>
+      </p>
+    </div>
+  `;
+  modal.style.display = 'flex';
 }
 
 function showCatDetailModal(cat) {
@@ -604,6 +700,19 @@ function loadCatFromFile(file) {
       if (!cat.username) {
         cat.username = file.name.replace(/\.json$/i, '');
       }
+
+      // 🔍 Strict Dress Code / Schema Validation
+      const errors = validateCat(cat, file.name);
+      if (errors.length > 0) {
+        cat.errors = errors;
+        showCatErrorModal(cat);
+        showCatToast(`🚫 "${file.name}" has ${errors.length} issue(s)! Check diagnosis!`);
+      } else {
+        delete cat.errors;
+        playCatMeow();
+        showCatToast(`🎉 Cat "@${cat.username}" passed all checks and is grooving!`);
+      }
+
       // Add or replace existing in state.cats
       const existingIdx = state.cats.findIndex(c => c.username?.toLowerCase() === cat.username?.toLowerCase());
       if (existingIdx >= 0) {
@@ -612,10 +721,12 @@ function loadCatFromFile(file) {
         state.cats.push(cat);
       }
       renderDancers();
-      playCatMeow();
-      showCatToast(`🎉 Cat "@${cat.username}" is live on the dance floor!`);
     } catch (err) {
-      showCatToast(`❌ Invalid JSON in ${file.name}: ${err.message}`);
+      showCatToast(`❌ Invalid JSON syntax in ${file.name}`);
+      showCatErrorModal({
+        username: file.name.replace(/\.json$/i, ''),
+        errors: [`Syntax error in JSON: ${err.message}. Please check for trailing commas, unquoted keys, or missing brackets.`]
+      });
     }
   };
   reader.readAsText(file);
@@ -760,10 +871,20 @@ function setupEventListeners() {
     detailModal.style.display = 'none';
   });
 
+  // Cat Error Modal
+  const errorModal = document.getElementById('catErrorModal');
+  document.getElementById('closeErrorModal')?.addEventListener('click', () => {
+    errorModal.style.display = 'none';
+  });
+  document.getElementById('closeErrorModalBtn')?.addEventListener('click', () => {
+    errorModal.style.display = 'none';
+  });
+
   // Close modals on clicking backdrop
   window.addEventListener('click', (e) => {
     if (e.target === helpModal) helpModal.style.display = 'none';
     if (e.target === detailModal) detailModal.style.display = 'none';
+    if (e.target === errorModal) errorModal.style.display = 'none';
   });
 
   // Keyboard shortcut: Spacebar toggles audio beat

@@ -853,6 +853,98 @@ body.beat-active .sub-cone {
 .speed-hyper .cat-avatar-wrap { animation-duration: calc(var(--bpm-duration) * 0.55) !important; }
 
 /* ==========================================================
+   BROKEN / GLITCHED CAT & ERROR MODAL (LINTING FEEDBACK)
+   ========================================================== */
+
+.cat-dancer.broken-cat {
+  filter: drop-shadow(0 0 14px rgba(255, 0, 85, 0.95)) !important;
+}
+
+.cat-dancer.broken-cat .cat-avatar-wrap {
+  animation: glitchTwitch 0.22s infinite alternate steps(2) !important;
+  opacity: 0.85;
+}
+
+@keyframes glitchTwitch {
+  0% { transform: translate(-3px, 1px) skewX(-10deg); filter: hue-rotate(90deg) contrast(1.4); }
+  50% { transform: translate(3px, -2px) skewX(8deg) scaleY(0.95); filter: invert(0.4); }
+  100% { transform: translate(1px, 2px) skewX(-5deg); filter: hue-rotate(-90deg); }
+}
+
+.broken-badge {
+  background: linear-gradient(90deg, #ff0055, #ff3300) !important;
+  color: #fff !important;
+  font-size: 9px !important;
+  font-weight: 900 !important;
+  padding: 2px 6px !important;
+  border-radius: 4px;
+  vertical-align: middle;
+  letter-spacing: 0.5px;
+  margin-left: 4px;
+  box-shadow: 0 0 10px #ff0055;
+  animation: blinkError 0.8s infinite alternate;
+}
+
+@keyframes blinkError {
+  0% { opacity: 0.6; transform: scale(0.96); }
+  100% { opacity: 1; transform: scale(1.04); }
+}
+
+/* Error Modal / Diagnosis */
+.error-card {
+  border-color: rgba(255, 0, 85, 0.5) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 0, 85, 0.35) !important;
+}
+
+.error-header {
+  border-bottom-color: rgba(255, 0, 85, 0.3) !important;
+  background: rgba(255, 0, 85, 0.08) !important;
+}
+
+.error-header h2 {
+  color: #ff3366 !important;
+}
+
+.error-diagnosis-box {
+  background: rgba(255, 0, 85, 0.06);
+  border: 1px solid rgba(255, 0, 85, 0.3);
+  padding: 16px 20px;
+  border-radius: 12px;
+  color: #ffc2cc;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.error-diagnosis-box .error-intro {
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.error-diagnosis-box ul {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.error-diagnosis-box li {
+  color: #ff88a3;
+}
+
+.error-diagnosis-box li strong {
+  color: #fff;
+}
+
+.error-diagnosis-box code {
+  color: var(--neon-cyan);
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+/* ==========================================================
    MODAL WINDOWS
    ========================================================== */
 
