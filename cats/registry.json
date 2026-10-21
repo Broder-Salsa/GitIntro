@@ -1,5 +1,159 @@
 [
   {
+    "username": "AdebtJewel121",
+    "name": "Otto",
+    "cat_name": "Green Ghoul",
+    "breed": "siamese",
+    "favorite_color": "#9DC209",
+    "dance_style": "bounce",
+    "accessory": "bow-tie",
+    "groove_speed": "normal",
+    "catchphrase": "I'm Chinese!"
+  },
+  {
+    "username": "ArcteryxCat",
+    "name": "Yoel Altschul",
+    "cat_name": "ArcteryxCat",
+    "breed": "void",
+    "favorite_color": "#FF007F",
+    "dance_style": "spin",
+    "accessory": "sunglasses",
+    "groove_speed": "hyper",
+    "catchphrase": "If you see me turn red... RUN"
+  },
+  {
+    "username": "Birka",
+    "name": "BirkaMR",
+    "cat_name": "Kittenwhiskers",
+    "breed": "siamese",
+    "favorite_color": "##800080",
+    "dance_style": "moonwalk",
+    "accessory": "crown",
+    "groove_speed": "fast",
+    "catchphrase": "Hee Hee! Woo!"
+  },
+  {
+    "username": "Bunnut",
+    "name": "Lukas Syaputra Brejner",
+    "cat_name": "Disco Purr-fessor",
+    "breed": "tuxedo",
+    "favorite_color": "#F49E4C",
+    "dance_style": "breakdance",
+    "accessory": "headphones",
+    "groove_speed": "hyper",
+    "catchphrase": "If I must fall then let me, the person I am becoming will catch me"
+  },
+  {
+    "username": "CBoy",
+    "name": "Eske",
+    "cat_name": "Fluffy",
+    "breed": "siamese",
+    "favorite_color": "#690ccc",
+    "dance_style": "moonwalk",
+    "accessory": "gold-chain",
+    "groove_speed": "chill",
+    "catchphrase": "Did you break it?"
+  },
+  {
+    "username": "Freddddyy1",
+    "name": "Frede Yding Abrahamsen",
+    "cat_name": "dotJason",
+    "breed": "tuxedo",
+    "favorite_color": "#191970",
+    "dance_style": "bounce",
+    "accessory": "gold-chain",
+    "groove_speed": "hyper",
+    "catchphrase": "Ugh, I really needed this, guys!"
+  },
+  {
+    "username": "IEatToddlers",
+    "name": "Marcel",
+    "cat_name": "ADDERALL",
+    "breed": "void",
+    "favorite_color": "#000000",
+    "dance_style": "bounce",
+    "accessory": "sunglasses",
+    "groove_speed": "hyper",
+    "catchphrase": "SHANE DAWSON SPIKED MY DRINK HELP"
+  },
+  {
+    "username": "KaroKat",
+    "name": "Karoline",
+    "cat_name": "KaroLineDance",
+    "breed": "siamese",
+    "favorite_color": "#e30e0e",
+    "dance_style": "robot",
+    "accessory": "sunglasses",
+    "groove_speed": "chill",
+    "catchphrase": "Hep Hey!"
+  },
+  {
+    "username": "Razvan_test",
+    "name": "Razvan",
+    "cat_name": "Pufi",
+    "breed": "siamese",
+    "favorite_color": "#000000",
+    "dance_style": "breakdance",
+    "accessory": "gold-chain",
+    "groove_speed": "slow",
+    "catchphrase": "Working meow meow!"
+  },
+  {
+    "username": "SupaCat",
+    "name": "Razvan",
+    "cat_name": "Disco Purr-fessor",
+    "breed": "tuxedo",
+    "favorite_color": "#FF007F",
+    "dance_style": "disco",
+    "accessory": "sunglasses",
+    "groove_speed": "normal",
+    "catchphrase": "Git push, git groove!"
+  },
+  {
+    "username": "The_real_Razvan",
+    "name": "Razvan",
+    "cat_name": "Disco Purr-fessor",
+    "breed": "tuxedo",
+    "favorite_color": "#FF007F",
+    "dance_style": "disco",
+    "accessory": "sunglasses",
+    "groove_speed": "normal",
+    "catchphrase": "Git push, git groove!"
+  },
+  {
+    "username": "ShahzodNiyazon",
+    "name": "Shahzod Niyazov",
+    "cat_name": "PussInBoots",
+    "breed": "ginger",
+    "favorite_color": "#028A0F",
+    "dance_style": "moonwalk",
+    "accessory": "crown",
+    "groove_speed": "normal",
+    "catchphrase": "Puss In Boots doesn't fear death!"
+  },
+  {
+    "username": "WizardTimeFireball",
+    "name": "Brynja Ingolfsdottir",
+    "cat_name": "Maple Syrup",
+    "breed": "ginger",
+    "favorite_color": "#742FB5",
+    "dance_style": "breakdance",
+    "accessory": "sunglasses",
+    "groove_speed": "hyper",
+    "catchphrase": "I live in Spain without the A"
+  },
+  {
+    "username": "Karengotke",
+    "name": "Karen Gotke",
+    "cat_name": "Disco Purr-fessor",
+    "breed": "tuxedo",
+    "favorite_color": "#FF007F",
+    "dance_style": "wiggle",
+    "accessory": "crown",
+    "groove_speed": "hyper",
+    "catchphrase": "wuup wuup"
+  },
+  {
     "username": "camille_super_TA",
     "name": "Camille",
     "cat_name": "Camillonella",
@@ -20,5 +174,60 @@
     "accessory": "headphones",
     "groove_speed": "normal",
     "catchphrase": "Merge conflict? Not on my dance floor!"
+  },
+  {
+    "username": "kevintran504",
+    "name": "Kevin Tran",
+    "cat_name": "martin",
+    "breed": "tuxedo",
+    "favorite_color": "#00FFCC",
+    "dance_style": "moonwalk",
+    "accessory": "bow-tie",
+    "groove_speed": "hyper",
+    "catchphrase": "Come with me if you want to dance!"
+  },
+  {
+    "username": "mimimao",
+    "name": "Michelle",
+    "cat_name": "mimimao",
+    "breed": "calico",
+    "favorite_color": "#FFF0F5",
+    "dance_style": "disco",
+    "accessory": "party hat",
+    "groove_speed": "hyper",
+    "catchphrase": "im a cat meow'"
+  },
+  {
+    "username": "okbeti",
+    "name": "beti",
+    "cat_name": "Liusik",
+    "breed": "tabby",
+    "favorite_color": "#808080",
+    "dance_style": "wiggle",
+    "accessory": "gold-chain",
+    "groove_speed": "normal",
+    "catchphrase": "mi bombooooclattt"
+  },
+  {
+    "username": "fairybaby000",
+    "name": "Paula",
+    "cat_name": "PussyPussyMeowMeow",
+    "breed": "siamese",
+    "favorite_color": "#FF69B4",
+    "dance_style": "moonwalk",
+    "accessory": "crown",
+    "groove_speed": "chill",
+    "catchphrase": "Pink pussy meow meow"
+  },
+  {
+    "username": "swaggiemeowmeow",
+    "name": "Jasmin",
+    "cat_name": "swaggiemeowmeow",
+    "breed": "tuxedo",
+    "favorite_color": "#C357FF",
+    "dance_style": "moonwalk",
+    "accessory": "gold-chain",
+    "groove_speed": "chill",
+    "catchphrase": "U can't handle all this meow"
   }
 ]
