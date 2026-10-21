@@ -398,7 +398,7 @@ body.drag-over .dancefloor-perspective {
   flex-direction: column;
   position: relative;
   z-index: 5;
-  padding: 20px 20px 80px 20px;
+  padding: 20px 20px 40px 20px;
   align-items: center;
 }
 
@@ -851,56 +851,6 @@ body.beat-active .sub-cone {
 
 .speed-chill .cat-avatar-wrap { animation-duration: calc(var(--bpm-duration) * 1.6) !important; }
 .speed-hyper .cat-avatar-wrap { animation-duration: calc(var(--bpm-duration) * 0.55) !important; }
-
-/* ==========================================================
-   TERMINAL BAR FOOTER
-   ========================================================== */
-
-.terminal-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 30;
-  background: #090614;
-  border-top: 1px solid var(--border-glass);
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-family: monospace;
-  font-size: 13px;
-  overflow-x: auto;
-}
-
-.terminal-tag {
-  background: var(--neon-cyan);
-  color: #000;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  letter-spacing: 1px;
-  white-space: nowrap;
-}
-
-.terminal-scroll {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  white-space: nowrap;
-}
-
-.terminal-scroll code {
-  color: var(--neon-green);
-  background: rgba(255, 255, 255, 0.05);
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.terminal-scroll .sep {
-  color: var(--text-muted);
-}
 
 /* ==========================================================
    MODAL WINDOWS
