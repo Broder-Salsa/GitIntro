@@ -56,6 +56,17 @@ window.GIT_DISCO_CATS = [
     "catchphrase": "Did you break it?"
   },
   {
+    "username": "Chris_Christiansen",
+    "name": "Chris",
+    "cat_name": "Chairman miav",
+    "breed": "void",
+    "favorite_color": "#9c57e5",
+    "dance_style": "robot",
+    "accessory": "gold-chain",
+    "groove_speed": "normal",
+    "catchphrase": "Are U kitten me"
+  },
+  {
     "username": "Freddddyy1",
     "name": "Frede Yding Abrahamsen",
     "cat_name": "dotJason",
