@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📖 Git Vocabulary & Concepts | Git Disco</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Press+Start+2P&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-neon vocab-page">
+  <!-- Subtle Ceiling Beams -->
+  <div class="light-beams">
+    <div class="beam beam-1"></div>
+    <div class="beam beam-2"></div>
+  </div>
+
+  <!-- Top Navigation & Controls Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <a href="index.html" class="logo logo-link">
+        <span class="logo-icon">🪩</span>
+        <div class="logo-text">
+          <h1>GIT DISCO</h1>
+          <span class="subtitle">Distributed Version-Controlled Dance Floor</span>
+        </div>
+      </a>
+
+      <!-- Page Navigation Tabs -->
+      <nav class="top-nav-tabs">
+        <a href="index.html" class="nav-tab">
+          <span class="tab-icon">🪩</span>
+          <span class="tab-text">Dance Floor</span>
+        </a>
+        <a href="vocabulary.html" class="nav-tab active">
+          <span class="tab-icon">📖</span>
+          <span class="tab-text">Vocabulary</span>
+        </a>
+      </nav>
+    </div>
+
+    <!-- Search in Header -->
+    <div class="dj-controls">
+      <div class="control-group search-group vocab-search-box">
+        <input type="text" id="vocabSearchInput" placeholder="🔍 Search definitions, commands...">
+      </div>
+      <a href="index.html" class="control-btn primary-btn back-btn">
+        <span>← Back to Dance Floor</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Vocabulary Container -->
+  <main class="vocab-container">
+    <div class="vocab-hero">
+      <h2>Git Terminology & Concept Cards</h2>
+      <p>Master the language of version control, categorized by lifecycle stage and colored for quick reference.</p>
+    </div>
+
+    <!-- Filter Category Pills -->
+    <div class="category-filters">
+      <button class="filter-pill active" data-category="all">
+        <span class="pill-dot dot-all"></span> All Terms (<span id="count-all">21</span>)
+      </button>
+      <button class="filter-pill" data-category="lifecycle">
+        <span class="pill-dot dot-cyan"></span> Core Lifecycle (<span id="count-lifecycle">8</span>)
+      </button>
+      <button class="filter-pill" data-category="remote">
+        <span class="pill-dot dot-purple"></span> Remote & Cloud (<span id="count-remote">7</span>)
+      </button>
+      <button class="filter-pill" data-category="branching">
+        <span class="pill-dot dot-green"></span> Branching & Collab (<span id="count-branching">7</span>)
+      </button>
+      <button class="filter-pill" data-category="safety">
+        <span class="pill-dot dot-yellow"></span> Config & Safety (<span id="count-safety">2</span>)
+      </button>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="cards-grid" id="cardsGrid">
+
+      <!-- ==========================================
+           1. CORE GIT LIFECYCLE & STATES (CYAN)
+           ========================================== -->
+      
+      <article class="vocab-card cat-lifecycle" data-category="lifecycle" data-keywords="repository repo folder history tracking">
+        <div class="card-badge">Core Lifecycle</div>
+        <h3 class="card-title">Repository <span class="term-alias">(Repo)</span></h3>
+        <p class="card-def">A project folder being tracked by Git. It contains all files, folders, and the complete history of every change made over time.</p>
+        <div class="card-footer">
+          <span class="tech-tag">Foundation</span>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-lifecycle" data-category="lifecycle" data-keywords="working directory workspace files uncommitted editor">
+        <div class="card-badge">Core Lifecycle</div>
+        <h3 class="card-title">Working Directory</h3>
+        <p class="card-def">The actual files you see and edit in your folder or code editor. These represent the current, uncommitted state of your work.</p>
+        <div class="card-footer">
+          <span class="tech-tag">State</span>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-lifecycle" data-category="lifecycle" data-keywords="staging area git add index packing box prepare">
+        <div class="card-badge">Core Lifecycle</div>
+        <h3 class="card-title">Staging Area <code class="cmd-inline">git add</code></h3>
+        <p class="card-def">A holding zone or "packing box" where you collect specific file changes before permanently saving them into history.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git add &lt;file&gt;</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-lifecycle" data-category="lifecycle" data-keywords="commit git commit snapshot checkpoint message timestamp history">
+        <div class="card-badge">Core Lifecycle</div>
+        <h3 class="card-title">Commit <code class="cmd-inline">git commit</code></h3>
+        <p class="card-def">A permanent, timestamped snapshot (or checkpoint) of the files currently in the staging area, accompanied by a descriptive message.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git commit -m "msg"</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-lifecycle" data-category="lifecycle" data-keywords="git init initialize new empty repo .git folder">
+        <div class="card-badge">Core Lifecycle</div>
+        <h3 class="card-title"><code class="cmd-inline">git init</code></h3>
+        <p class="card-def">The command that initializes a brand new, empty Git repository in an existing directory by creating a hidden <code>.git</code> folder.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git init</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-lifecycle" data-category="lifecycle" data-keywords="git clone download copy remote github cloud local">
+        <div class="card-badge">Core Lifecycle</div>
+        <h3 class="card-title"><code class="cmd-inline">git clone</code></h3>
+        <p class="card-def">The command used to download an existing remote repository from the cloud to your local machine, automatically setting up history and remote links.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git clone &lt;url&gt;</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-lifecycle" data-category="lifecycle" data-keywords="git status check inspect modified untracked staged">
+        <div class="card-badge">Core Lifecycle</div>
+        <h3 class="card-title"><code class="cmd-inline">git status</code></h3>
+        <p class="card-def">The sanity-check command that displays the state of your working directory and staging area (which files are modified, staged, or untracked).</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git status</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-lifecycle" data-category="lifecycle" data-keywords="git log history past commits chronological log graph">
+        <div class="card-badge">Core Lifecycle</div>
+        <h3 class="card-title"><code class="cmd-inline">git log</code></h3>
+        <p class="card-def">A command that displays the chronological history of past commits in the project.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git log --oneline</code>
+        </div>
+      </article>
+
+      <!-- ==========================================
+           2. REMOTE SYNC & CLOUD TERMS (PURPLE/MAGENTA)
+           ========================================== -->
+
+      <article class="vocab-card cat-remote" data-category="remote" data-keywords="local remote computer cloud server github comparison">
+        <div class="card-badge">Remote Sync</div>
+        <h3 class="card-title">Local vs. Remote</h3>
+        <div class="card-def">
+          <p><strong>Local:</strong> The repository stored directly on your computer's drive.</p>
+          <p style="margin-top: 6px;"><strong>Remote:</strong> The repository hosted in the cloud or on a server (such as GitHub).</p>
+        </div>
+        <div class="card-footer">
+          <span class="tech-tag">Architecture</span>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-remote" data-category="remote" data-keywords="origin nickname alias remote url github cloned default">
+        <div class="card-badge">Remote Sync</div>
+        <h3 class="card-title">Origin</h3>
+        <p class="card-def">The default nickname/alias Git gives to the remote repository URL that you cloned from.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">origin</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-remote" data-category="remote" data-keywords="upstream remote branch tracking target link push pull">
+        <div class="card-badge">Remote Sync</div>
+        <h3 class="card-title">Upstream</h3>
+        <p class="card-def">The target remote branch that a local branch is linked to for pushing and pulling.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">-u / --set-upstream</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-remote" data-category="remote" data-keywords="push git push upload send commits remote github">
+        <div class="card-badge">Remote Sync</div>
+        <h3 class="card-title">Push <code class="cmd-inline">git push</code></h3>
+        <p class="card-def">Uploading your local commits up to the remote repository on GitHub.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git push -u origin &lt;branch&gt;</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-remote" data-category="remote" data-keywords="pull git pull download fetch integrate merge changes">
+        <div class="card-badge">Remote Sync</div>
+        <h3 class="card-title">Pull <code class="cmd-inline">git pull</code></h3>
+        <p class="card-def">Downloading changes from the remote repository and immediately integrating them into your current local branch.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git pull origin master</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-remote" data-category="remote" data-keywords="fetch git fetch download inspect without merging safe">
+        <div class="card-badge">Remote Sync</div>
+        <h3 class="card-title">Fetch <code class="cmd-inline">git fetch</code></h3>
+        <p class="card-def">Downloading changes and commits from the remote repository into your local system without automatically merging them into your working files.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git fetch origin</code>
+        </div>
+      </article>
+
+      <!-- ==========================================
+           3. BRANCHING & COLLABORATION (GREEN)
+           ========================================== -->
+
+      <article class="vocab-card cat-branching" data-category="branching" data-keywords="branch parallel workspace isolate feature switch checkout">
+        <div class="card-badge">Branching & Collab</div>
+        <h3 class="card-title">Branch</h3>
+        <p class="card-def">An independent, parallel workspace split off from the main project where you can build features or fix bugs without breaking the working code.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git switch -c &lt;name&gt;</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-branching" data-category="branching" data-keywords="main master primary official production branch working default">
+        <div class="card-badge">Branching & Collab</div>
+        <h3 class="card-title">Main / Master</h3>
+        <p class="card-def">The primary, official branch that contains the production-ready, working version of the application.</p>
+        <div class="card-footer">
+          <span class="tech-tag">Primary Trunk</span>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-branching" data-category="branching" data-keywords="fork copy github account open source external propose">
+        <div class="card-badge">Branching & Collab</div>
+        <h3 class="card-title">Fork</h3>
+        <p class="card-def">A personal copy of someone else’s GitHub repository created under your own GitHub account, often used for proposing changes in open-source projects.</p>
+        <div class="card-footer">
+          <span class="tech-tag">GitHub Cloud Copy</span>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-branching" data-category="branching" data-keywords="pull request pr review proposal merge accept team github">
+        <div class="card-badge">Branching & Collab</div>
+        <h3 class="card-title">Pull Request <span class="term-alias">(PR)</span></h3>
+        <p class="card-def">A formal proposal created on GitHub asking the repository owner/team to review, test, and accept the code from your branch into main/master.</p>
+        <div class="card-footer">
+          <span class="tech-tag">Review Proposal</span>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-branching" data-category="branching" data-keywords="merge combine branches integrate join commits history">
+        <div class="card-badge">Branching & Collab</div>
+        <h3 class="card-title">Merge</h3>
+        <p class="card-def">The act of combining the commits and history from one branch into another.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git merge &lt;branch&gt;</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-branching" data-category="branching" data-keywords="merge conflict clash overwrite different same line human resolution">
+        <div class="card-badge">Branching & Collab</div>
+        <h3 class="card-title">Merge Conflict</h3>
+        <p class="card-def">A situation that occurs when two people modify the same lines of the same file in different ways, requiring a human to manually choose which code to keep.</p>
+        <div class="card-footer">
+          <span class="tech-tag alert-tag">Needs Human Touch</span>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-branching" data-category="branching" data-keywords="stash git stash temporary shelf hide save working directory clean">
+        <div class="card-badge">Branching & Collab</div>
+        <h3 class="card-title">Stash <code class="cmd-inline">git stash</code></h3>
+        <p class="card-def">A command that temporarily shelves (hides away) uncommitted changes so you can work on something else with a clean directory without committing unfinished work.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">git stash / pop</code>
+        </div>
+      </article>
+
+      <!-- ==========================================
+           4. PROJECT CONFIGURATION & SAFETY (YELLOW)
+           ========================================== -->
+
+      <article class="vocab-card cat-safety" data-category="safety" data-keywords="gitignore ignore ignore secrets build node_modules ds_store sensitive">
+        <div class="card-badge">Config & Safety</div>
+        <h3 class="card-title"><code class="cmd-inline">.gitignore</code></h3>
+        <p class="card-def">A text file placed in the root of the repository that explicitly tells Git which files, folders, or sensitive assets to completely ignore and never track.</p>
+        <div class="card-footer">
+          <code class="cmd-pill">.gitignore</code>
+        </div>
+      </article>
+
+      <article class="vocab-card cat-safety" data-category="safety" data-keywords="head pointer reference current branch commit working directory">
+        <div class="card-badge">Config & Safety</div>
+        <h3 class="card-title">HEAD</h3>
+        <p class="card-def">A pointer or reference indicating which branch and commit your working directory is currently set to.</p>
+        <div class="card-footer">
+          <span class="tech-tag">Current Pointer</span>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- Interactive Search & Filter Script -->
+  <script>
+    const searchInput = document.getElementById('vocabSearchInput');
+    const filterPills = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.vocab-card');
+
+    let currentCategory = 'all';
+    let currentQuery = '';
+
+    function filterCards() {
+      let visibleCount = 0;
+      cards.forEach(card => {
+        const matchesCategory = currentCategory === 'all' || card.dataset.category === currentCategory;
+        const textContent = (card.textContent + ' ' + (card.dataset.keywords || '')).toLowerCase();
+        const matchesQuery = !currentQuery || textContent.includes(currentQuery);
+
+        if (matchesCategory && matchesQuery) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      currentQuery = e.target.value.toLowerCase().trim();
+      filterCards();
+    });
+
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentCategory = pill.dataset.category;
+        filterCards();
+      });
+    });
+  </script>
+</body>
+</html>
