@@ -4,6 +4,12 @@ on:
   pull_request:
     paths:
       - 'cats/**'
+  push:
+    branches:
+      - master
+    paths:
+      - 'cats/**'
+  workflow_dispatch:
 
 jobs:
   validate-cat:
