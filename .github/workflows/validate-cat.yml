@@ -7,8 +7,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'cats/**'
   workflow_dispatch:
 
 jobs:
